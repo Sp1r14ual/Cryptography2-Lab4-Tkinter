@@ -11,7 +11,7 @@ class RandomSequenceGeneratorApp:
     def __init__(self, master):
         self.master = master
         master.title("Генератор псевдослучайной последовательности")
-        master.geometry("800x500")  # Установка размера окна
+        master.geometry("650x500")  # Установка размера окна
 
         self.label = tk.Label(master, text="Введите параметры генератора:")
         self.label.grid(row=0, column=0, columnspan=2)
@@ -20,18 +20,23 @@ class RandomSequenceGeneratorApp:
         self.label_seed.grid(row=1, column=0)
         self.entry_seed = tk.Entry(master)
         self.entry_seed.grid(row=1, column=1)
-        self.load_seed_button = tk.Button(master, text="Загрузить из файла", command=self.load_seed_from_file)
-        self.load_seed_button.grid(row=1, column=2)
+        # self.load_seed_button = tk.Button(master, text="Загрузить из файла", command=self.load_seed_from_file)
+        # self.load_seed_button.grid(row=1, column=2)
 
         self.label_key = tk.Label(master, text="Key:")
         self.label_key.grid(row=2, column=0)
         self.entry_key = tk.Entry(master)
         self.entry_key.grid(row=2, column=1)
-        self.load_key_button = tk.Button(master, text="Загрузить из файла", command=self.load_key_from_file)
-        self.load_key_button.grid(row=2, column=2)
+        # self.load_key_button = tk.Button(master, text="Загрузить из файла", command=self.load_key_from_file)
+        # self.load_key_button.grid(row=2, column=2)
+
+        self.label_m = tk.Label(master, text="m:")
+        self.label_m.grid(row=3, column=0)
+        self.entry_m = tk.Entry(master)
+        self.entry_m.grid(row=3, column=1)
 
         self.generate_button = tk.Button(master, text="Сгенерировать", command=self.generate_sequence)
-        self.generate_button.grid(row=3, column=0, columnspan=2)
+        self.generate_button.grid(row=4, column=0, columnspan=2)
 
         self.result_label = tk.Label(master, text="")
         self.result_label.grid(row=5, column=0, columnspan=2)
@@ -64,8 +69,12 @@ class RandomSequenceGeneratorApp:
         try:
             seed = int(self.entry_seed.get(), base=2)
             key = int(self.entry_key.get(), base=2)
+            m = int(self.entry_m.get(), base=10)
 
-            sequence = bin(next(ANSI_X9_17(seed, key)))[2:]
+            sequence = str()
+
+            for i in range(m):
+                sequence += bin(next(ANSI_X9_17(seed, key)))[2:]
 
             self.result_label.config(text="Последовательность сгенерирована")
         except ValueError:
