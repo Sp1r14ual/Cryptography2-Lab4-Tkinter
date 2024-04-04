@@ -11,7 +11,7 @@ class RandomSequenceGeneratorApp:
     def __init__(self, master):
         self.master = master
         master.title("Генератор псевдослучайной последовательности")
-        master.geometry("650x500")  # Установка размера окна
+        master.geometry("800x600")  # Установка размера окна
 
         self.label = tk.Label(master, text="Введите параметры генератора:")
         self.label.grid(row=0, column=0, columnspan=2)
@@ -20,15 +20,15 @@ class RandomSequenceGeneratorApp:
         self.label_seed.grid(row=1, column=0)
         self.entry_seed = tk.Entry(master)
         self.entry_seed.grid(row=1, column=1)
-        # self.load_seed_button = tk.Button(master, text="Загрузить из файла", command=self.load_seed_from_file)
-        # self.load_seed_button.grid(row=1, column=2)
+        self.load_seed_button = tk.Button(master, text="Загрузить из файла", command=self.load_seed_from_file)
+        self.load_seed_button.grid(row=1, column=2)
 
         self.label_key = tk.Label(master, text="Key:")
         self.label_key.grid(row=2, column=0)
         self.entry_key = tk.Entry(master)
         self.entry_key.grid(row=2, column=1)
-        # self.load_key_button = tk.Button(master, text="Загрузить из файла", command=self.load_key_from_file)
-        # self.load_key_button.grid(row=2, column=2)
+        self.load_key_button = tk.Button(master, text="Загрузить из файла", command=self.load_key_from_file)
+        self.load_key_button.grid(row=2, column=2)
 
         self.label_m = tk.Label(master, text="m:")
         self.label_m.grid(row=3, column=0)
@@ -46,7 +46,7 @@ class RandomSequenceGeneratorApp:
         self.results_text.grid(row=6, column=0, columnspan=2)
 
         # Размещаем кнопку "Сохранить результаты тестов" по центру
-        self.save_results_button = tk.Button(master, text="Сохранить результаты тестов", command=self.save_results)
+        self.save_results_button = tk.Button(master, text="Сохранить результат", command=self.save_results)
         self.save_results_button.grid(row=7, column=0, columnspan=2, pady=10)
 
     def load_seed_from_file(self):
